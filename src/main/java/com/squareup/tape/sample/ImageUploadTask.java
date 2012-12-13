@@ -39,6 +39,9 @@ public class ImageUploadTask implements Task<ImageUploadTask.Callback> {
     new Thread(new Runnable() {
       @Override public void run() {
         try {
+
+          Thread.sleep(10000);
+
           HttpRequest request = post(IMGUR_UPLOAD_URL)
               .part("key", IMGUR_API_KEY)
               .part("image", file);
@@ -67,7 +70,9 @@ public class ImageUploadTask implements Task<ImageUploadTask.Callback> {
           }
         } catch (RuntimeException e) {
           e.printStackTrace();
-          throw e;
+          //throw e;
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
       }
     }).start();
